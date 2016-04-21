@@ -32,7 +32,7 @@
                                                 <input id="countryCode" class="slds-input" type="text" placeholder="Country Code"/>
                                             </div>
                                         </div>
-                                        <button class="slds-button slds-button--brand slds-m-top--medium" type="button" onClick="getWeather()">Get Weather Infor</button>
+                                        <button class="slds-button slds-button--brand slds-m-top--medium" type="button" onClick="getWeather()">Get Weather Information</button>
                                     </form>
                                 </fieldset>
                             </div>
