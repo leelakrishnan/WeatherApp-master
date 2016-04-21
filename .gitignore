@@ -1,0 +1,9 @@
+*.sublime-workspace
+config/.apex_script
+config/.debug
+config/.describe
+WeatherApp.sublime-project
+WeatherApp.sublime-settings
+config/.local_store
+config/.session
+config/.settings
