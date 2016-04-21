@@ -1,0 +1,85 @@
+<apex:page controller="WeatherAppController" showHeader="false" standardStylesheets="false" sidebar="false" 
+           applyHtmlTag="false" applyBodyTag="false" docType="html-5.0">
+    
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">  
+      <head>
+          <title>Continuation with Holding of values test</title>
+          <apex:stylesheet value="{!URLFOR($Resource.SLDS0101, '/assets/styles/salesforce-lightning-design-system-vf.css')}"/>
+        
+        </head>
+        <body>
+            <div class="slds">
+                <p class="slds-text-heading--label slds-m-bottom--small">
+                    Continuation with holding values example
+                </p>
+                <div class="slds-grid">
+                    <div class="slds-col slds-no-flex slds-align-middle">
+                        <div class="weatherApp">
+                            <div aria-labelledby="findweatherform">
+                                <fieldset class="slds-box slds-theme--default slds-container--small">
+                                  <legend id="findweatherform" class="slds-text-heading--medium slds-p-vertical--medium">
+                                      Find Weather</legend>
+                                    <form class="slds-form--stacked">
+                                        <div class="slds-form-element">
+                                            <label class="slds-form-element__label" for="zipCode">Zip/Postal Code</label>
+                                            <div class="slds-form-element__control">
+                                                <input id="zipCode" class="slds-input" type="text" placeholder="Zip/Postal Code"/>
+                                            </div>
+                                        </div>
+                                        <div class="slds-form-element">
+                                            <label class="slds-form-element__label" for="countryCode">Country Code</label>
+                                            <div class="slds-form-element__control">
+                                                <input id="countryCode" class="slds-input" type="text" placeholder="Country Code"/>
+                                            </div>
+                                        </div>
+                                        <button class="slds-button slds-button--brand slds-m-top--medium" type="button" onClick="getWeather()">Get Weather  Information</button>
+                                    </form>
+                                </fieldset>
+                            </div>
+                        </div> <!-- weatherApp -->
+                    </div> <!-- slds-col -->
+                </div> <!-- slds-grid -->
+                <div class="slds-grid">
+                    <div class="slds-col slds-align-middle">
+                    </div> <!-- slds-col -->
+                    <div class="slds-col slds-align-middle">
+                        <div id="weatherResults" class="slds-p-vertical--medium"></div>
+                    </div>
+                    <div class="slds-col  slds-align-middle">
+                    </div> <!-- slds-col -->
+                </div> <!-- slds-grid -->
+            </div> <!-- slds -->
+            <script type="text/javascript">
+            
+                function getWeather() {
+                    var zipCode = document.getElementById ("zipCode").value;
+                    var countryCode = document.getElementById ("countryCode").value;
+                    console.log(zipCode);
+                    console.log(countryCode);
+                    Visualforce.remoting.Manager.invokeAction(
+                         '{!$RemoteAction.WeatherAppController.getWeather}',
+                        zipCode,
+                        countryCode,
+                        showWeatherResults,{escape:false}
+                    ); //remoting
+
+                
+                }//Function
+            
+            function showWeatherResults(result,event) {
+                var weatherResults = document.getElementById("weatherResults");
+                var html = '<div class="slds-scrollable--x"><table class="slds-table slds-table--bordered">';   
+                            html += '<thead><tr><th scope="col">Zip Code</th>';
+                            html += '<th scope="col">Country</th><th scope="col">Current Temperature</th><th scope="col">Account ID</th></tr></thead><tbody>';   
+                html += '<tr><td>' + result.zipCode + '</td>';
+                html += '<td>' + result.country + '</td>';
+                html += '<td>' + result.currentTemperature + '</td>';
+                html += '<td>' + result.acountID + '</td></tr>';
+                 html = html + '</tbody></table></div>';
+                weatherResults.innerHTML = html;
+
+            } //function showWeatherResults
+            </script>
+        </body>
+    </html>
+</apex:page>
