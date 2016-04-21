@@ -34,7 +34,7 @@ public class WeatherAppController {
         waso.accountID = [SELECT id from Account limit 1].id;
         String requestLabel = '';
         String url = 'http://api.openweathermap.org/data/2.5/weather?zip='+zipCode+','+country
-                        +'&APPID=881331eacee38611e2c9db4b15ebec51';
+                        +'&APPID=13b28f89d7259c00cd78d4fab2ec3a36';
 
         HttpRequest req = new HttpRequest();
         req.setMethod('GET');
